@@ -1,0 +1,63 @@
+
+.item{
+  border : 1px solid #c0baba4f;
+  padding: 10px;
+  border-radius:5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin: 5px 5px 0px 0px ;
+}
+.item:hover{
+  border: 1px solid #2196f3;
+}
+.fecha_name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.obra{
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  justify-content: center;
+}
+.search, .reset, .filter,.reverse{
+  border:none;
+  background-color:transparent;
+  outline:none;
+}
+.search{
+  width:98%;
+}
+.reset{
+  position:absolute;
+  right:25px;
+}
+.filter{
+  position:absolute;
+  right:50px;
+}
+.reverse{
+  position:absolute;
+  right:5px;
+}
+.reset:focus,.filter:focus,.reset:hover,.filter:hover,.reverse:hover,.reverse:focus{
+  color:#2196f3;
+}
+.reset:hover,.filter:hover,.reverse:hover{
+  cursor:pointer;
+}
+.boxSearch{
+  position:sticky;
+  top:10px;
+  border: 1px solid #c0baba;
+  border-radius : 5px;
+  padding:5px;
+  margin:5px 5px 0px 0px;
+  margin-bottom:20px;
+  background-color:white;
+}
+.boxSearch:hover{
+  border: 1px solid #2196f3;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
