@@ -185,7 +185,6 @@ func addLink(name string, value any){
     name = strings.Split(name,"=>")[1]
     Action(func(){
       Selector(name).LinkVar(value.(*string))
-      log.Println("interface.go: ","link in ",name," value =>",value.(*string))
     })
   default:
     log.Println("Link event need string direction")
@@ -195,8 +194,11 @@ func addLink(name string, value any){
 func addEvent(name string,value any){
   switch value.(type){
   case func(*Events):
+    _type := strings.ToLower(strings.Split(name,"=>")[0][1:])
+    identifier := strings.Split(name,"=>")[1]
+    call := value.(func(*Events))
     Action(func(){
-      log.Println("event name ",name, "=>",value.(func(*Events)))
+      Selector(identifier).AddEventListener(_type, call )
     })
   default:
     log.Println("Error event need func and event direction")

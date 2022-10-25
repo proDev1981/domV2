@@ -9,10 +9,10 @@ var orden = true
 
 var Control = dom.NewComp(
   dom.Args{
-    "@Click=>.filter":"",
-    "@Click=>.reset":"",
-    "@Click=>.reverse" :"",
-    "@Link=>.search":&input,
+    "@Click=>.filter":   handle_filter,
+    "@Click=>.reset":    handle_reset,
+    "@Click=>.reverse" : handle_reverse,
+    "@Link=>.search":    &input,
   },
   `
     <div class='boxSearch'>
@@ -22,36 +22,31 @@ var Control = dom.NewComp(
       <button class='reverse'>≚</button>
     </div>
 `)
-
-func AControl(){
-    filter := dom.Selector(".filter")
-    reset := dom.Selector(".reset")
-    reverse := dom.Selector(".reverse")
-    // filter
-    filter.AddEventListener("click",func(e *dom.Events){
-        res := dom.Filter(database.Get(),func(item model.ManoObra)bool{
-                    return dom.ContainsWordInAny(input, item.Fecha,item.Name,item.Obra)
-                })
-        database.Set(res)
-    })
-    // reset
-    reset.AddEventListener("click",func(e *dom.Events){
-        dom.Selector(".search").SetAttribute("value","")
-        database.Set(model.CsvToManoObra(
-            csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
-        ))
-    })
-    // reverse
-    reverse.AddEventListener("click",func(e *dom.Events) {
-        if orden{
-            reverse.SetAttribute("style","transform : rotate(180deg)")
-            orden = false
-        }else{
-            reverse.SetAttribute("style","transform : rotate(0deg)")
-            orden = true
-        }
-        database.Set(dom.Reverse[model.ManoObra](database.Get()))
-    })
+// manejador boton filter
+func handle_filter(e *dom.Events){
+  res := dom.Filter(database.Get(),func(item model.ManoObra)bool{
+              return dom.ContainsWordInAny(input, item.Fecha,item.Name,item.Obra)
+          })
+  database.Set(res)
+}
+// manejador boton reset
+func handle_reset(e *dom.Events){
+  dom.Selector(".search").SetAttribute("value","")
+  database.Set(model.CsvToManoObra(
+      csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
+  ))
+}
+// manejador boton reset
+func handle_reverse(e *dom.Events){
+  reverse := e.GetTarget()
+  if orden{
+      reverse.SetAttribute("style","transform : rotate(180deg)")
+      orden = false
+  }else{
+      reverse.SetAttribute("style","transform : rotate(0deg)")
+      orden = true
+  }
+  database.Set(dom.Reverse[model.ManoObra](database.Get()))
 }
 
 

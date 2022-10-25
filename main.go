@@ -9,6 +9,6 @@ func main(){
     ui.App.Render(),
     dom.NewWindow().SetTitle("pruebaV2"),
   )
-  dom.AddAction(ui.AControl)
+  dom.AddAction()
   dom.OnWait()
 }

@@ -11,19 +11,15 @@ var database = dom.State(
     csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
   ))
 
-var escenePrueba = dom.Escene("prueba",false)
-
   var App = dom.NewComp(
     dom.Args{ 
     	"Control":Control,
     	"Slice":Slice,
     	"Title":Title, 
-    	"Prueba":Prueba, 
     },
     `
       <div class='app'>
         </Title>
-        </Prueba>
         </Control>
         </Slice>
       </div>
