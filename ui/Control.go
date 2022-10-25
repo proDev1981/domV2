@@ -8,7 +8,12 @@ var input string
 var orden = true
 
 var Control = dom.NewComp(
-  dom.Args{},
+  dom.Args{
+    "@Click=>.filter":"",
+    "@Click=>.reset":"",
+    "@Click=>.reverse" :"",
+    "@Link=>.search":&input,
+  },
   `
     <div class='boxSearch'>
       <input class='search' type='text'></input>
@@ -21,12 +26,9 @@ var Control = dom.NewComp(
 func AControl(){
     filter := dom.Selector(".filter")
     reset := dom.Selector(".reset")
-    search := dom.Selector(".search")
     reverse := dom.Selector(".reverse")
     // filter
     filter.AddEventListener("click",func(e *dom.Events){
-        escenePrueba.Change()
-        filter.SetInnerText("...")
         res := dom.Filter(database.Get(),func(item model.ManoObra)bool{
                     return dom.ContainsWordInAny(input, item.Fecha,item.Name,item.Obra)
                 })
@@ -34,10 +36,9 @@ func AControl(){
     })
     // reset
     reset.AddEventListener("click",func(e *dom.Events){
-        filter.SetInnerText("Go")
-        search.SetAttribute("value","")
+        dom.Selector(".search").SetAttribute("value","")
         database.Set(model.CsvToManoObra(
-            csv.Open(`G:/Mi unidad/DB/src/operarios.csv`).Get(),
+            csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
         ))
     })
     // reverse
@@ -51,9 +52,6 @@ func AControl(){
         }
         database.Set(dom.Reverse[model.ManoObra](database.Get()))
     })
-    // search
-    search.LinkVar(&input)
-
 }
 
 

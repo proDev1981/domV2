@@ -5,6 +5,7 @@ import "strings"
 import "reflect"
 import "regexp"
 import "strconv"
+import "log"
 
 type InterfaceComponent interface{
   Render()string
@@ -73,6 +74,12 @@ func (this *Comp) parse()(html string){
     }
     if key == "@Escene"{
       value.(*_Escene_).Add(this)
+    }
+    if strings.Contains(key,"@Link=>"){
+      addLink(key,value)
+    }
+    if strings.Contains(key,"=>") && !strings.Contains(key,"Link"){
+      addEvent(key,value)
     }
     switch value.(type){
     case *_State_:
@@ -169,5 +176,29 @@ func (this *Comp) getIdentifier(){
     this.typeIdentifier = "id"
   default:
     panic("Component need identifier!!")
+  }
+}
+// add link in element
+func addLink(name string, value any){
+  switch value.(type){
+  case *string:
+    name = strings.Split(name,"=>")[1]
+    Action(func(){
+      Selector(name).LinkVar(value.(*string))
+      log.Println("interface.go: ","link in ",name," value =>",value.(*string))
+    })
+  default:
+    log.Println("Link event need string direction")
+  }
+}
+// add event in element
+func addEvent(name string,value any){
+  switch value.(type){
+  case func(*Events):
+    Action(func(){
+      log.Println("event name ",name, "=>",value.(func(*Events)))
+    })
+  default:
+    log.Println("Error event need func and event direction")
   }
 }
