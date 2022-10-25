@@ -8,7 +8,7 @@ import (
 
 var database = dom.State(
   model.CsvToManoObra(
-    csv.Open(`G:/Mi unidad/DB/src/operarios.csv`).Get(),
+    csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
   ))
 
 var escenePrueba = dom.Escene("prueba",false)
