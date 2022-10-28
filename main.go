@@ -7,8 +7,8 @@ import "app/ui"
 func main(){
   dom.New(
     ui.App.Render(),
-    dom.NewWindow().SetTitle("pruebaV2"),
+    dom.NewWindow().
+      SetTitle("pruebaV2"),
   )
-  dom.AddAction()
   dom.OnWait()
 }

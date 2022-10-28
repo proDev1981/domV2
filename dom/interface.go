@@ -22,7 +22,7 @@ type Comp struct{
   typeIdentifier string
 }
 // create new component implement interface 
-func NewComp(props Args, html string)*Comp{
+func NewComp(html string, props Args)*Comp{
   ele := &Comp{ props:props , html:html }
   return ele
 }
