@@ -14,10 +14,10 @@ var Control = dom.NewComp(`
     </div>
 
 `,dom.Args{
-            "@Click=>.filter":   handles.Filter,
-            "@Click=>.reset":    handles.Reset,
-            "@Click=>.reverse" : handles.Reverse,
-            "@Link=>.search":    &handles.Query,
+    "@Click=>.filter":   handles.Filter,
+    "@Click=>.reset":    handles.Reset,
+    "@Click=>.reverse" : handles.Reverse,
+    "@Link=>.search":    &handles.Query,
 })
 
 
