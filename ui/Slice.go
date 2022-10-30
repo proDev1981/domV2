@@ -1,6 +1,7 @@
 package ui
 
 import "app/dom"
+import "app/model"
 
 var Slice = dom.NewComp(`
 
@@ -12,5 +13,5 @@ var Slice = dom.NewComp(`
       <span class='obra'>{{.Obra}}</span>
     </div>
 
-`,dom.Args{ "@Map":database })
+`,dom.Args{ "@Map":model.Database })
 

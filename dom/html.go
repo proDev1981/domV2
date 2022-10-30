@@ -4,8 +4,8 @@ import "strings"
 import "fmt"
 import "regexp"
 
-var attrs01 = `\s+[\w\d]+\s*=\s*"[\w\d()$'.,\s]+"\s*`// regexp atributos con comillas dobles
-var attrs02 = `\s+[\w\d]+\s*=\s*'[\w\d()$".,\s]+'\s*`// regexp atributos con comillas simples
+var attrs01 = `[\w\d]+\s*=\s*"[\w\d()$'.,\s]+"`// regexp atributos con comillas dobles
+var attrs02 = `[\w\d]+\s*=\s*'[\w\d()$".,\s]+'`// regexp atributos con comillas simples
 var attrs03 = `\s+[\w\d]+\s*=\s*[\w\d$]+\s*`// regexp atributos sin comillas
 var contRef int
 
@@ -103,7 +103,7 @@ func getInnerhtml(ele *Element)string{
   return inner
 }
 func getOutherhtml(ele *Element)string{
-  return fmt.Sprint("<",ele.TagName,strings.Join(ele.Attributes,""),">",ele.GetInnerHTML(),"</",ele.TagName,">")
+  return fmt.Sprint("<",ele.TagName," ",strings.Join(ele.Attributes," "),">",ele.GetInnerHTML(),"</",ele.TagName,">")
 }
 // convert string html in struct dom
 func StrToDom(str string,save bool)*Element{

@@ -1,13 +1,13 @@
-package ui
+package handles
 
 import "app/dom"
 import "app/model"
 import "csv"
 
 // manejador boton reset
-func handleReset(e *dom.Events){
+func Reset(e *dom.Events){
   dom.Selector(".search").SetAttribute("value","")
-  database.Set(model.CsvToManoObra(
+  model.Database.Set(model.CsvToManoObra(
       csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
   ))
 }

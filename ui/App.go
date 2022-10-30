@@ -2,14 +2,7 @@ package ui
 
 import (
 	"app/dom"
-	"app/model"
-	"csv"
 )
-
-var database = dom.State(
-  model.CsvToManoObra(
-    csv.Open(`G:/Mi unidad/DB/src/operarios.db`).Get(),
-  ))
 
   var App = dom.NewComp(`
 
@@ -17,7 +10,8 @@ var database = dom.State(
         </Title>
         </Control>
         </Slice>
+        </FormGastos>
       </div>
 
-  `,dom.Args{ "Control":Control,"Slice":Slice,"Title":Title })
+  		`,dom.Args{ "Control":Control,"Slice":Slice,"Title":Title, "FormGastos":FormGastos })
 

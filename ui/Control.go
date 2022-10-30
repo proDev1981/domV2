@@ -1,9 +1,8 @@
 package ui
 
 import "app/dom"
+import "app/handles"
 
-var input string
-var orden = true
 
 var Control = dom.NewComp(`
 
@@ -15,10 +14,10 @@ var Control = dom.NewComp(`
     </div>
 
 `,dom.Args{
-            "@Click=>.filter":   handleFilter,
-            "@Click=>.reset":    handleReset,
-            "@Click=>.reverse" : handleReverse,
-            "@Link=>.search":    &input,
+            "@Click=>.filter":   handles.Filter,
+            "@Click=>.reset":    handles.Reset,
+            "@Click=>.reverse" : handles.Reverse,
+            "@Link=>.search":    &handles.Query,
 })
 
 

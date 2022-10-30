@@ -1,7 +1,5 @@
 package model
 
-
-
 type ManoObra struct{
   Name      string
   Fecha     string
